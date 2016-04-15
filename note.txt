@@ -1,0 +1,105 @@
+kembomatoMacBook:python-recsys kembostaff$ python
+Python 2.7.11 (default, Dec 26 2015, 17:47:15) 
+[GCC 4.2.1 Compatible Apple LLVM 7.0.2 (clang-700.1.81)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import numpy as np
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named numpy
+>>> 
+>>> 
+>>> 25000 - 22480
+2520
+>>> import numpy as np
+>>> from recsys.algorithm.factorize import SVD
+>>> svd = SVD()
+>>> svd.load_data(filename='./data/movielens/ratings.dat',
+...             sep='::',
+...             format={'col':0, 'row':1, 'value':2, 'ids': int})
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+  File "recsys/algorithm/baseclass.py", line 99, in load_data
+    self._data.load(filename, force, sep, format, pickle)
+  File "recsys/datamodel/data.py", line 124, in load
+    for line in codecs.open(path, 'r', 'utf8'):
+  File "/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python2.7/codecs.py", line 896, in open
+    file = __builtin__.open(filename, mode, buffering)
+IOError: [Errno 2] No such file or directory: './data/movielens/ratings.dat'
+>>> 
+>>> 
+>>> 
+>>> 
+>>> svd
+0 rows.
+>>> 
+>>> 
+>>> svd.load_data(filename='./data/movielens/ratings.dat', sep='::', format={'col':0, 'row':1, 'value':2, 'ids': int})
+>>> svd
+1000209 rows.
+E.g: (5.0, 1193, 1)
+>>> svd.class
+  File "<stdin>", line 1
+    svd.class
+            ^
+SyntaxError: invalid syntax
+>>> svd
+1000209 rows.
+E.g: (5.0, 1193, 1)
+>>>  k = 100
+  File "<stdin>", line 1
+    k = 100
+    ^
+IndentationError: unexpected indent
+>>> k
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'k' is not defined
+>>> k=199
+>>> k=100
+>>> 
+>>> 
+>>> 
+>>> 
+>>> svd.compute(k=k, min_values=10, pre_normalize=None, mean_center=True, post_normalize=True)
+>>> 
+>>> 
+>>> svd
+M':<ReconstructedMatrix: 3260 by 6040>
+A row (U):[1 => 0.0041248126078, 2 => 0.00418103000838, 12 => 0.000471401106939, 15 => -0.00858931180342, 17 => 0.0164704783116, 18 => 0.016861331101, 19 => 0.00344272528412, 24 => 0.00413093852851, 28 => -0.00771526611141, 33 => -0.000420197657774, ...]
+A col (V):[ 1.8996949   1.88665787  1.81666782  1.04746923 -0.68267523  0.28995296
+ -2.42966552 -0.3564187   0.15838384 -1.44051389 -3.19675392 -0.50945781
+  0.24590743 -0.3075926   1.75410003 -0.36932612  1.74932562  0.92237397
+  1.7754225   0.98911108  0.5707958   0.81375213 -0.82632217 -0.38598853
+  0.82433934  0.57424823  1.36967881 -0.44009344  0.1521516   0.3526325
+  1.101763    0.66055258  0.05467022 -1.81448595 -0.32190356  0.25010199
+ -1.52972521 -1.53218737  1.58826824 -0.1790555   0.31121328 -1.16946658
+  0.22481972 -0.31515127 -0.26835079 -0.65502938 -0.33703164 -1.01119163
+  0.36397452 -1.80837948 -0.1592266  -0.00492633  0.65398277  1.13578753
+ -0.64872497  1.10102341  0.20903888  0.396682    0.48270192 -2.39418639
+ -0.0267316  -1.27744757 -0.10076913  1.94167527  1.10330419  0.78574228
+  1.28044651  0.64671809  0.89054617  0.26465312 -0.40245992 -2.15016655
+  0.61976848  2.44996369  0.33951394 -0.77486392  0.84804199  0.6538682
+ -0.89390026  0.15229447 -1.05201836  0.1493524  -1.41641561 -1.52409164
+  0.26495483  0.53953093 -1.08436842 -0.85387657 -0.10330558  0.60745377
+ -1.43642265 -0.58560561 -0.82890118  0.93141388  0.89838717 -0.74746707
+ -0.16703277  0.84624703  0.04815827 -1.65286012]
+>>> 
+>>> 
+>>> svd.similarity(1, 2355)
+0.67706936677314966
+>>>  svd.similar(1)
+  File "<stdin>", line 1
+    svd.similar(1)
+    ^
+IndentationError: unexpected indent
+>>> 
+>>> 
+>>> svd.similar(1)
+[(1, 0.99999999999999978), (3114, 0.87060391051017305), (2355, 0.67706936677314977), (588, 0.58073514967544992), (595, 0.46031829709744226), (1907, 0.44589398718134982), (364, 0.42908159895577563), (2081, 0.42566581277822413), (3396, 0.42474056361934953), (2761, 0.40439361857576017)]
+>>> 
+>>> 
+>>> svd.recommend(1, is_row=False) 
+[(2028, 0.45838722229605749), (588, 0.45287857189578218), (2355, 0.44697663823650841), (1, 0.41847539128799754), (1270, 0.40013341110578188), (595, 0.39817047564748465), (3114, 0.350362373663273), (2081, 0.33304503503062838), (1028, 0.30235395172222146), (1022, 0.29397815928755949)]
+>>> svd.recommend(1)
+[(869, 2.7394216256490114), (2665, 2.2004400024959092), (752, 1.9618180538975938), (549, 1.9166639938673289), (4658, 1.8573329306267834), (1676, 1.8365921315977307), (5367, 1.8274104251775871), (1125, 1.8165883560823974), (3401, 1.8143381602190169), (2611, 1.6641920276301048)]
+>>> svd.recommend(ITEMID)
